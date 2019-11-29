@@ -7,15 +7,28 @@
 
 package frc.robot;
 
+import com.kauailabs.navx.frc.AHRS;
+
+import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.Joystick;
+
 
 public class Robot extends TimedRobot {
 
+  Joystick rightstick = new Joystick(0);
+  Joystick leftstick = new Joystick(1);
+
+  AHRS ahrs;
+
+  TankDrive tankDrive;
+
+
   @Override
   public void robotInit() {
-    
+
+    ahrs = new AHRS(SerialPort.Port.kUSB);
+		ahrs.reset();
   }
 
   @Override
@@ -34,6 +47,10 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopPeriodic() {
+    double rightspeed = rightstick.getY();
+    double leftspeed = leftstick.getY();
+
+    tankDrive.drive(rightspeed, leftspeed);
   }
 
   @Override
