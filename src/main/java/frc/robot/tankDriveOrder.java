@@ -1,10 +1,11 @@
 package frc.robot;
 
+
 public class tankDriveOrder {
 
-    int leftPower, rightPower; 
+    double leftPower, rightPower; 
 
-    public tankDriveOrder (int leftPower, int rightPower) {
+    public tankDriveOrder(double leftPower, double rightPower) {
         this.leftPower = leftPower;
         this.rightPower = rightPower;
     }
