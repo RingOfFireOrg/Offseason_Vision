@@ -23,7 +23,7 @@ public class Vision {
     final double DRIVE_K = 0.7; // how hard to drive fwd toward the target
     final double DESIRED_TARGET_AREA = 13.0; // Area of the target when the robot reaches the wall
 
-    
+
     private boolean validTarget() {
         tv = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tv").getDouble(0);
         ts = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ts").getDouble(0);
@@ -151,4 +151,15 @@ public class Vision {
         // this will do things in the future
         return true;
     }
+
+    void updateVisionVals(){
+        try {
+            SmartDashboard.putNumber("tx", tx);
+            SmartDashboard.putNumber("ty", ty);
+            SmartDashboard.putNumber("ta", ta);
+        } catch (Exception e) {
+            return;
+        }
+    }
 }
+
