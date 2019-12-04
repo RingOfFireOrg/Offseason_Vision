@@ -12,6 +12,7 @@ public class TankDrive extends DifferentialDrive {
 	private static final int ROTATIONS_PER_INCH = 5;
 	private Encoder leftEncoder = new Encoder(RobotMap.DRIVE_TRAIN_LEFT_ENCODER_A, RobotMap.DRIVE_TRAIN_LEFT_ENCODER_B, false, Encoder.EncodingType.k1X);
 	private Encoder rightEncoder = new Encoder(RobotMap.DRIVE_TRAIN_RIGHT_ENCODER_A, RobotMap.DRIVE_TRAIN_RIGHT_ENCODER_B, false, Encoder.EncodingType.k1X);
+	private boolean encoderSpeedRegulationEnabled = true;
 	
 	TankDrive() {
 		super(
@@ -27,8 +28,19 @@ public class TankDrive extends DifferentialDrive {
 		initEncoder(rightEncoder);
 	}
 
+	public boolean encoderSpeedRegulation(boolean encoderSpeedRegulationEnabled) {
+		this.encoderSpeedRegulationEnabled = encoderSpeedRegulationEnabled;
+		return encoderSpeedRegulationEnabled;
+	}
+
 	public void drive(double leftSpeed, double rightSpeed) {
-		tankDrive(leftSpeed, rightSpeed);
+		if (encoderSpeedRegulationEnabled) {
+			double goalInchesPerSecondLeft = leftSpeed * RobotMap.MAX_INCHES_PER_SECOND;
+			double goalInchesPerSecondRight = rightSpeed * RobotMap.MAX_INCHES_PER_SECOND;
+		} else {
+			tankDrive(leftSpeed, rightSpeed);
+		}
+		
 	}
 	
 	private void initEncoder(Encoder encoder) {
@@ -50,6 +62,11 @@ public class TankDrive extends DifferentialDrive {
 	
 	public double getRightDistance() {
 		return rightEncoder.getDistance() * ROTATIONS_PER_INCH;
+	}
+
+	public double getLeftRate() {
+		//will return rate of left in inches per second
+		return leftEncoder.getRa
 	}
 	
 	public void resetEncoders() {

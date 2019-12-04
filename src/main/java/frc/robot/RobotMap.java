@@ -10,6 +10,7 @@ public class RobotMap {
 
 	//Joystick Buttons
 
+
 	// Robot Ports
 	// Analog Ports
 
@@ -24,5 +25,9 @@ public class RobotMap {
 	public static final int DRIVE_TRAIN_LEFT_ENCODER_B = 1;
 	public static final int DRIVE_TRAIN_RIGHT_ENCODER_A = 2;
 	public static final int DRIVE_TRAIN_RIGHT_ENCODER_B = 3;
+
+	//Constants
+
+	public static final int MAX_INCHES_PER_SECOND = 120;
 
 }
