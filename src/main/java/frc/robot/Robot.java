@@ -16,8 +16,8 @@ import edu.wpi.first.wpilibj.Joystick;
 
 public class Robot extends TimedRobot {
 
-  Joystick rightstick = new Joystick(0);
-  Joystick leftstick = new Joystick(1);
+  Joystick rightstick = new Joystick(RobotMap.JOYSTICK_DRIVE_RIGHT);
+  Joystick leftstick = new Joystick(RobotMap.JOYSTICK_DRIVE_LEFT);
 
   AHRS ahrs;
 
@@ -50,7 +50,7 @@ public class Robot extends TimedRobot {
     double rightspeed = rightstick.getY();
     double leftspeed = leftstick.getY();
 
-    tankDrive.drive(rightspeed, leftspeed);
+    // tankDrive.drive(rightspeed, leftspeed);
   }
 
   @Override
