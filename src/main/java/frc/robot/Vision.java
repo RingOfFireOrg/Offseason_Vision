@@ -169,7 +169,7 @@ public class Vision {
         SmartDashboard.putNumber("ta", ta);
     }
 
-    public void getTargetDistance(){
+    public double getTargetDistance(){
         double heightDifference = TARGET_HEIGHT - CAMERA_HEIGHT;
         double totalAngle = CAMERA_MOUNT_ANGLE + ty;
 
@@ -178,6 +178,7 @@ public class Vision {
 
         double targetDistance = heightDifference / (Math.sin(Math.toRadians(totalAngle)));
         SmartDashboard.putNumber("Target Distance", targetDistance);
+        return targetDistance();
     }
 }
 
