@@ -24,7 +24,12 @@ public class Robot extends TimedRobot {
 
   TankDrive tankDrive;
 
-  Vision Vision;
+  Vision vision;
+
+
+  double tx;
+  double ty;
+  double ta;
 
 
   @Override
@@ -34,6 +39,7 @@ public class Robot extends TimedRobot {
     ahrs.reset();
     
     tankDrive = new TankDrive();
+    vision = new Vision();
   }
 
   @Override
@@ -56,7 +62,8 @@ public class Robot extends TimedRobot {
     double leftspeed = leftstick.getY();
 
     tankDrive.drive(rightspeed, leftspeed);
-    Vision.updateVisionVals();
+
+    vision.updateVisionVals(); 
   }
 
   @Override

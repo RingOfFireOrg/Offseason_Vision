@@ -3,6 +3,8 @@ package frc.robot;
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
@@ -152,14 +154,14 @@ public class Vision {
         return true;
     }
 
-    void updateVisionVals(){
-        try {
-            SmartDashboard.putNumber("tx", tx);
-            SmartDashboard.putNumber("ty", ty);
-            SmartDashboard.putNumber("ta", ta);
-        } catch (Exception e) {
-            return;
-        }
+    public void updateVisionVals(){
+        tx = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0.0);
+        ty = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ty").getDouble(0.0);
+        ta = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ta").getDouble(0.0);
+
+        SmartDashboard.putNumber("tx", tx);
+        SmartDashboard.putNumber("ty", ty);
+        SmartDashboard.putNumber("ta", ta);
     }
 }
 
