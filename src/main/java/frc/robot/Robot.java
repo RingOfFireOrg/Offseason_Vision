@@ -13,6 +13,8 @@ import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Joystick;
 
+import com.revrobotics.CANSparkMax;
+
 
 public class Robot extends TimedRobot {
 
@@ -31,7 +33,7 @@ public class Robot extends TimedRobot {
 		ahrs.reset();
   }
 
-  @Override
+  @OverrideF
   public void robotPeriodic() {
   }
 
