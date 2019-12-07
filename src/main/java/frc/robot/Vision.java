@@ -6,6 +6,7 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import java.lang.Math;
 
 
 public class Vision {
@@ -24,6 +25,10 @@ public class Vision {
     final double STEER_K = 0.03; // how hard to drive sideways to center on the target
     final double DRIVE_K = 0.7; // how hard to drive fwd toward the target
     final double DESIRED_TARGET_AREA = 13.0; // Area of the target when the robot reaches the wall
+
+    final double TARGET_HEIGHT = 54.0; // Target's height in centimeters
+    final double CAMERA_HEIGHT = 35.0; // Limelight's height in centimeters
+    final double CAMERA_MOUNT_ANGLE = 0.0; // Limelight's mounting angle in degrees
 
 
     private boolean validTarget() {
@@ -162,6 +167,17 @@ public class Vision {
         SmartDashboard.putNumber("tx", tx);
         SmartDashboard.putNumber("ty", ty);
         SmartDashboard.putNumber("ta", ta);
+    }
+
+    public void getTargetDistance(){
+        double heightDifference = TARGET_HEIGHT - CAMERA_HEIGHT;
+        double totalAngle = CAMERA_MOUNT_ANGLE + ty;
+
+        SmartDashboard.putNumber("Height", heightDifference);
+        SmartDashboard.putNumber("Angle", totalAngle);
+
+        double targetDistance = heightDifference / (Math.sin(Math.toRadians(totalAngle)));
+        SmartDashboard.putNumber("Target Distance", targetDistance);
     }
 }
 

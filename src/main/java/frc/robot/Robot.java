@@ -64,6 +64,7 @@ public class Robot extends TimedRobot {
     tankDrive.drive(rightspeed, leftspeed);
 
     vision.updateVisionVals(); 
+    vision.getTargetDistance();
   }
 
   @Override
