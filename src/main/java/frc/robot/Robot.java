@@ -11,6 +11,7 @@ import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.Joystick;
 
 import com.revrobotics.CANSparkMax;
@@ -18,19 +19,29 @@ import com.revrobotics.CANSparkMax;
 
 public class Robot extends TimedRobot {
 
-  Joystick rightstick = new Joystick(0);
-  Joystick leftstick = new Joystick(1);
+  Joystick rightstick = new Joystick(RobotMap.JOYSTICK_DRIVE_RIGHT);
+  Joystick leftstick = new Joystick(RobotMap.JOYSTICK_DRIVE_LEFT);
 
   AHRS ahrs;
 
   TankDrive tankDrive;
+
+  Vision vision;
+
+
+  double tx;
+  double ty;
+  double ta;
 
 
   @Override
   public void robotInit() {
 
     ahrs = new AHRS(SerialPort.Port.kUSB);
-		ahrs.reset();
+    ahrs.reset();
+    
+    tankDrive = new TankDrive();
+    vision = new Vision();
   }
 
   @OverrideF
@@ -53,6 +64,9 @@ public class Robot extends TimedRobot {
     double leftspeed = leftstick.getY();
 
     tankDrive.drive(rightspeed, leftspeed);
+
+    vision.updateVisionVals(); 
+    vision.getTargetDistance();
   }
 
   @Override
