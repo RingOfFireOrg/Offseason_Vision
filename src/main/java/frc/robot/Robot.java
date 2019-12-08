@@ -59,7 +59,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     double rightspeed = driverGamepad.getRawAxis(5);
-    double leftspeed = driverGamepad.getRawAxis(4);
+    double leftspeed = driverGamepad.getRawAxis(1);
 
     tankDrive.drive(rightspeed, leftspeed);
 
