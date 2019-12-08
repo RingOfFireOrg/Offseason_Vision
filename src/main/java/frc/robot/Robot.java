@@ -13,12 +13,12 @@ import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.XboxController;
 
 
 public class Robot extends TimedRobot {
 
-  Joystick rightstick = new Joystick(RobotMap.JOYSTICK_DRIVE_RIGHT);
-  Joystick leftstick = new Joystick(RobotMap.JOYSTICK_DRIVE_LEFT);
+  public XboxController driverGamepad = new XboxController(RobotMap.DRIVER_GAMEPAD);
 
   AHRS ahrs;
 
@@ -58,8 +58,8 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopPeriodic() {
-    double rightspeed = rightstick.getY();
-    double leftspeed = leftstick.getY();
+    double rightspeed = driverGamepad.getRawAxis(5);
+    double leftspeed = driverGamepad.getRawAxis(4);
 
     tankDrive.drive(rightspeed, leftspeed);
 
