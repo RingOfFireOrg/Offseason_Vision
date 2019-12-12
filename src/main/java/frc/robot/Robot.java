@@ -13,22 +13,34 @@ import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Joystick;
 
+import edu.wpi.first.wpilibj.Spark;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
 
 public class Robot extends TimedRobot {
 
   Joystick rightstick = new Joystick(0);
   Joystick leftstick = new Joystick(1);
+  Joystick manipulatorStick = new Joystick(2);
 
   AHRS ahrs;
 
   TankDrive tankDrive;
 
+  private static final int testDeviceID = 2; 
+  private CANSparkMax testMotor;
+  private Spark demoMotor;
 
   @Override
   public void robotInit() {
 
     ahrs = new AHRS(SerialPort.Port.kUSB);
-		ahrs.reset();
+    ahrs.reset();
+    
+    testMotor = new CANSparkMax(testDeviceID, MotorType.kBrushless);
+    //demoMotor = new Spark(2);
+    testMotor.restoreFactoryDefaults();
   }
 
   @Override
@@ -49,8 +61,12 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     double rightspeed = rightstick.getY();
     double leftspeed = leftstick.getY();
+    double testSpeed = manipulatorStick.getY();
 
-    tankDrive.drive(rightspeed, leftspeed);
+
+    testMotor.set(testSpeed);
+    //demoMotor.set(1.75);
+    // tankDrive.drive(rightspeed, leftspeed);
   }
 
   @Override
