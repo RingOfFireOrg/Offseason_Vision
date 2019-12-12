@@ -13,7 +13,6 @@ import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Joystick;
 
-import edu.wpi.first.wpilibj.Spark;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
@@ -30,7 +29,6 @@ public class Robot extends TimedRobot {
 
   private static final int testDeviceID = 2; 
   private CANSparkMax testMotor;
-  private Spark demoMotor;
 
   @Override
   public void robotInit() {
