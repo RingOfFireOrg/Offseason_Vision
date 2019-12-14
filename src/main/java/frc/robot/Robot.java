@@ -25,7 +25,7 @@ public class Robot extends TimedRobot {
 
   AHRS ahrs;
 
-  TankDrive tankDrive;
+  NeoTankDrive neoDrive;
 
   private static final int frontLeftMotorID = 0;
   private static final int frontRightMotorID = 1;
@@ -75,7 +75,7 @@ public class Robot extends TimedRobot {
     double rightspeed = rightstick.getY();
     double leftspeed = leftstick.getY();
     
-    tankDrive.drive(rightspeed, leftspeed);
+    neoDrive.drive(rightspeed, leftspeed);
   }
 
   @Override

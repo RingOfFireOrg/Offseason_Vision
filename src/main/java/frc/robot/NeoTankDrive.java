@@ -13,6 +13,7 @@ public class NeoTankDrive {
         new CANSparkMax(RobotMap.MOTOR_FRONT_LEFT, MotorType.kBrushless),
         new CANSparkMax(RobotMap.MOTOR_BACK_LEFT, MotorType.kBrushless));
 
+
     public void drive(double rightSpeed, double leftSpeed){
         rightMotors.set(rightSpeed);
         leftMotors.set(leftSpeed);
