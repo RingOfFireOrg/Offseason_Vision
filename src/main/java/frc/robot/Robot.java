@@ -17,7 +17,7 @@ import edu.wpi.first.wpilibj.Joystick;
 
 public class Robot extends TimedRobot {
 
-  Joystick leftJoytick = new Joystick(RobotMap.JOYSTICK_DRIVE_LEFT);
+  Joystick leftJoystick = new Joystick(RobotMap.JOYSTICK_DRIVE_LEFT);
   Joystick rightJoystick = new Joystick(RobotMap.JOYSTICK_DRIVE_RIGHT);
 
   AHRS ahrs;
@@ -29,7 +29,8 @@ public class Robot extends TimedRobot {
   public void robotInit() {
 
     ahrs = new AHRS(SerialPort.Port.kUSB);
-		ahrs.reset();
+    ahrs.reset();
+    
   }
 
   @Override
@@ -38,7 +39,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
-
+    
   }
 
   @Override
