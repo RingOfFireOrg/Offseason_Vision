@@ -12,6 +12,7 @@ import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.XboxController;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
@@ -23,14 +24,11 @@ public class Robot extends TimedRobot {
   Joystick leftstick = new Joystick(1);
   Joystick manipulatorStick = new Joystick(2);
 
+  XboxController driveController = new XboxController(RobotMap.DRIVE_CONTROLLER);
+
   AHRS ahrs;
 
   NeoTankDrive neoDrive;
-
-  private static final int frontLeftMotorID = 0;
-  private static final int frontRightMotorID = 1;
-  private static final int backRightMotorID = 2;
-  private static final int backLeftMotorID = 3;
   
   private CANSparkMax frontLeftMotor;
   private CANSparkMax frontRightMotor;
@@ -43,17 +41,15 @@ public class Robot extends TimedRobot {
     ahrs = new AHRS(SerialPort.Port.kUSB);
     ahrs.reset();
     
-    frontLeftMotor = new CANSparkMax(frontLeftMotorID, MotorType.kBrushless);
-    frontRightMotor = new CANSparkMax(frontRightMotorID, MotorType.kBrushless);
-    backRightMotor = new CANSparkMax(backRightMotorID, MotorType.kBrushless);
-    backLeftMotor = new CANSparkMax(backLeftMotorID, MotorType.kBrushless);
+    frontLeftMotor = new CANSparkMax(RobotMap.NEO_FRONT_LEfT, MotorType.kBrushless);
+    frontRightMotor = new CANSparkMax(RobotMap.NEO_FRONT_RIGHT, MotorType.kBrushless);
+    backRightMotor = new CANSparkMax(RobotMap.NEO_BACK_RIGHT, MotorType.kBrushless);
+    backLeftMotor = new CANSparkMax(RobotMap.NEO_BACK_LEFT, MotorType.kBrushless);
 
-    //demoMotor = new Spark(2);
     frontLeftMotor.restoreFactoryDefaults();
     frontRightMotor.restoreFactoryDefaults();
     backRightMotor.restoreFactoryDefaults();
     backLeftMotor.restoreFactoryDefaults();
-
   }
 
   @Override
@@ -72,10 +68,10 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopPeriodic() {
-    double rightspeed = rightstick.getY();
-    double leftspeed = leftstick.getY();
+    double rightspeed = driveController.getRawAxis(5);
+    double leftspeed = driveController.getRawAxis(1);
     
-    neoDrive.drive(rightspeed, leftspeed);
+    neoDrive.drive(rightspeed, leftspeed, false);
   }
 
   @Override
