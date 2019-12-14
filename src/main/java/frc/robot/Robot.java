@@ -27,8 +27,15 @@ public class Robot extends TimedRobot {
 
   TankDrive tankDrive;
 
-  private static final int testDeviceID = 2; 
-  private CANSparkMax testMotor;
+  private static final int frontLeftMotorID = 0;
+  private static final int frontRightMotorID = 1;
+  private static final int backRightMotorID = 2;
+  private static final int backLeftMotorID = 3;
+  
+  private CANSparkMax frontLeftMotor;
+  private CANSparkMax frontRightMotor;
+  private CANSparkMax backRightMotor;
+  private CANSparkMax backLeftMotor;
 
   @Override
   public void robotInit() {
@@ -36,9 +43,17 @@ public class Robot extends TimedRobot {
     ahrs = new AHRS(SerialPort.Port.kUSB);
     ahrs.reset();
     
-    testMotor = new CANSparkMax(testDeviceID, MotorType.kBrushless);
+    frontLeftMotor = new CANSparkMax(frontLeftMotorID, MotorType.kBrushless);
+    frontRightMotor = new CANSparkMax(frontRightMotorID, MotorType.kBrushless);
+    backRightMotor = new CANSparkMax(backRightMotorID, MotorType.kBrushless);
+    backLeftMotor = new CANSparkMax(backLeftMotorID, MotorType.kBrushless);
+
     //demoMotor = new Spark(2);
-    testMotor.restoreFactoryDefaults();
+    frontLeftMotor.restoreFactoryDefaults();
+    frontRightMotor.restoreFactoryDefaults();
+    backRightMotor.restoreFactoryDefaults();
+    backLeftMotor.restoreFactoryDefaults();
+
   }
 
   @Override
@@ -59,12 +74,8 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     double rightspeed = rightstick.getY();
     double leftspeed = leftstick.getY();
-    double testSpeed = manipulatorStick.getY();
-
-
-    testMotor.set(testSpeed);
-    //demoMotor.set(1.75);
-    // tankDrive.drive(rightspeed, leftspeed);
+    
+    tankDrive.drive(rightspeed, leftspeed);
   }
 
   @Override
