@@ -30,26 +30,22 @@ public class Robot extends TimedRobot {
 
   NeoTankDrive neoDrive;
   
-  private CANSparkMax frontLeftMotor;
-  private CANSparkMax frontRightMotor;
-  private CANSparkMax backRightMotor;
-  private CANSparkMax backLeftMotor;
+  public CANSparkMax frontLeftMotor;
+  public CANSparkMax frontRightMotor;
+  public CANSparkMax backRightMotor;
+  public CANSparkMax backLeftMotor;
 
   @Override
   public void robotInit() {
-
     ahrs = new AHRS(SerialPort.Port.kUSB);
     ahrs.reset();
+
+    neoDrive = new NeoTankDrive();
     
-    frontLeftMotor = new CANSparkMax(RobotMap.NEO_FRONT_LEfT, MotorType.kBrushless);
+    frontLeftMotor = new CANSparkMax(RobotMap.NEO_FRONT_LEFT, MotorType.kBrushless);
     frontRightMotor = new CANSparkMax(RobotMap.NEO_FRONT_RIGHT, MotorType.kBrushless);
     backRightMotor = new CANSparkMax(RobotMap.NEO_BACK_RIGHT, MotorType.kBrushless);
     backLeftMotor = new CANSparkMax(RobotMap.NEO_BACK_LEFT, MotorType.kBrushless);
-
-    frontLeftMotor.restoreFactoryDefaults();
-    frontRightMotor.restoreFactoryDefaults();
-    backRightMotor.restoreFactoryDefaults();
-    backLeftMotor.restoreFactoryDefaults();
   }
 
   @Override
@@ -68,10 +64,25 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopPeriodic() {
-    double rightspeed = driveController.getRawAxis(5);
-    double leftspeed = driveController.getRawAxis(1);
-    
-    neoDrive.drive(rightspeed, leftspeed, false);
+    double rightspeed = rightstick.getY();
+    double leftspeed = leftstick.getY();
+
+    neoDrive.drive(rightspeed, leftspeed, true);
+
+    // if (driveController.getYButton()){
+    //   frontLeftMotor.set(0.3); 
+    // } else if (driveController.getBButton()){
+    //   frontRightMotor.set(0.3);
+    // } else if (driveController.getAButton()){
+    //   backRightMotor.set(0.3);
+    // } else if (driveController.getXButton()){
+    //   backLeftMotor.set(0.3);
+    // } else {
+    //   frontLeftMotor.set(0);
+    //   frontRightMotor.set(0);
+    //   backRightMotor.set(0);
+    //   backLeftMotor.set(0);
+    // }
   }
 
   @Override
