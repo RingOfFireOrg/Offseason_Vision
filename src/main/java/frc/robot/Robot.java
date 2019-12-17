@@ -12,7 +12,6 @@ import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.XboxController;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
@@ -23,8 +22,6 @@ public class Robot extends TimedRobot {
   Joystick rightstick = new Joystick(0);
   Joystick leftstick = new Joystick(1);
   Joystick manipulatorStick = new Joystick(2);
-
-  XboxController driveController = new XboxController(RobotMap.DRIVE_CONTROLLER);
 
   AHRS ahrs;
 
@@ -64,25 +61,10 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopPeriodic() {
-    double rightspeed = rightstick.getY();
-    double leftspeed = leftstick.getY();
+    double rightSpeed = rightstick.getY();
+    double leftSpeed = leftstick.getY();
 
-    neoDrive.drive(rightspeed, leftspeed, true);
-
-    // if (driveController.getYButton()){
-    //   frontLeftMotor.set(0.3); 
-    // } else if (driveController.getBButton()){
-    //   frontRightMotor.set(0.3);
-    // } else if (driveController.getAButton()){
-    //   backRightMotor.set(0.3);
-    // } else if (driveController.getXButton()){
-    //   backLeftMotor.set(0.3);
-    // } else {
-    //   frontLeftMotor.set(0);
-    //   frontRightMotor.set(0);
-    //   backRightMotor.set(0);
-    //   backLeftMotor.set(0);
-    // }
+    neoDrive.drive(rightSpeed, leftSpeed, 1.0, true);
   }
 
   @Override

@@ -14,14 +14,14 @@ public class NeoTankDrive {
         new CANSparkMax(RobotMap.NEO_BACK_LEFT, MotorType.kBrushless));
 
 
-    public void drive(double rightSpeed, double leftSpeed, boolean isSquared){
+    public void drive(double rightSpeed, double leftSpeed, double limiter, boolean isSquared){
         if (isSquared){
-            leftSpeed = Math.copySign(leftSpeed * leftSpeed, leftSpeed);
-            rightSpeed = Math.copySign(rightSpeed * rightSpeed, rightSpeed);
+            leftSpeed = limiter * Math.copySign(leftSpeed * leftSpeed, leftSpeed);
+            rightSpeed = limiter * Math.copySign(rightSpeed * rightSpeed, rightSpeed);
         }
 
-        rightMotors.set(rightSpeed);
-        leftMotors.set(-leftSpeed);
+        rightMotors.set(limiter * rightSpeed);
+        leftMotors.set(limiter * -leftSpeed);
     }
 }
 
