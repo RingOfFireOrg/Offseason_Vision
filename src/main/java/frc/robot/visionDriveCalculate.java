@@ -35,7 +35,7 @@ public class visionDriveCalculate {
     }
 
     private double driveRadius(double firstDrive, double sectorAngle) {
-        return (firstDrive)(Math.tan(Math.toRadians((180 - sectorAngle) / 2)));
+        return (firstDrive)*(Math.tan(Math.toRadians((180 - sectorAngle) / 2)));
     }
 
     private tankDriveOrder powerDifferential(double centerSpeed, double radius, double driveBase) {
