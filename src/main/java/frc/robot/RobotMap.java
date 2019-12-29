@@ -25,4 +25,5 @@ public class RobotMap {
 	public static final int DRIVE_TRAIN_RIGHT_ENCODER_A = 2;
 	public static final int DRIVE_TRAIN_RIGHT_ENCODER_B = 3;
 
+    public static final int DRIVE_BASE_WIDTH_CM = 777; //temporary number -- distance between the two center wheels
 }
